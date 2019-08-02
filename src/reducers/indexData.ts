@@ -1,4 +1,4 @@
-import { INIT_BANNER_DATA, INIT_RECOMMEND_LIST } from '../constants/indexData'
+import { INIT_BANNER_DATA, INIT_RECOMMEND_LIST, LOAD_MORE_LIST } from '../constants/indexData'
 
 const INITIAL_STATE = {
   bannerData: [],
@@ -16,6 +16,11 @@ export default function indexData (state = INITIAL_STATE, action) {
       return {
         ...state,
         recommendList: action.data
+      }
+    case LOAD_MORE_LIST:
+      return {
+        ...state,
+        recommendList: [...state.recommendList, ...action.data]
       }
     default:
       return state

@@ -1,7 +1,8 @@
 import Api from '../service/api'
 import {
   INIT_BANNER_DATA,
-  INIT_RECOMMEND_LIST
+  INIT_RECOMMEND_LIST,
+  LOAD_MORE_LIST
 } from '../constants/indexData'
 
 const initBannerData = (data: any) => {
@@ -18,6 +19,13 @@ const initRecommendList = (data: any) => {
   }
 }
 
+const loadMoreList = (data: any) => {
+  return {
+    type: LOAD_MORE_LIST,
+    data
+  }
+}
+
 export const asyncInitBannerData = (type: number) => {
   return (dispatch) => {
     Api.get('/banner', { type })
@@ -27,11 +35,20 @@ export const asyncInitBannerData = (type: number) => {
   }
 }
 
-export const asyncInitRecommendList = (limit: number, order: string = 'hot') => {
+export const asyncInitRecommendList = (limit: number, cat: string = '全部') => {
   return (dispatch) => {
-    Api.get('/top/playlist', { limit, order })
+    Api.get('/top/playlist/highquality', { limit, cat })
       .then((res) => {
         dispatch(initRecommendList(res.data.playlists))
+      })
+  }
+}
+
+export const asyncLoadMoreList = (limit: number, before: number, cat: string = '全部') => {
+  return (dispatch) => {
+    Api.get('/top/playlist/highquality', { limit, before, cat })
+      .then((res) => {
+        dispatch(loadMoreList(res.data.playlists))
       })
   }
 }

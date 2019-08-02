@@ -3,8 +3,12 @@
 .index {
   padding-top: 100px;
   box-sizing: border-box;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #424143;
+
+  &-scroll {
+    height: 100%;
+  }
 
   &-navbar {
     .at-nav-bar {
@@ -98,4 +102,10 @@
       }
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

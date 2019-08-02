@@ -1,1 +1,1 @@
-export const base: string = 'http://192.168.3.101:3000'
+export const base: string = 'http://47.108.75.184:8080'
