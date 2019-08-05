@@ -51,10 +51,20 @@ class Index extends Component {
   config: Config = {
     enablePullDownRefresh: true,
   }
-  componentDidMount () {
-    this.props.asyncInitBannerData(2)
-    this.props.asyncInitRecommendList(18)
+
+  componentWillMount () {
+    const token: string = Taro.getStorageSync('user_token')
+    if (!token) {
+      Taro.redirectTo({
+        url: '/pages/login/index'
+      })
+    } else {
+      this.props.asyncInitBannerData(2)
+      this.props.asyncInitRecommendList(18)
+    }
   }
+
+  componentDidMount () {}
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
